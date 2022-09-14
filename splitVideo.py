@@ -1,6 +1,18 @@
 # Import everything needed to edit video clips
 from moviepy.editor import *
 
+# --------------------------------------------
+# Enter movie file path
+file = "Source\Piper.mp4"
+
+# Enter Movie Name
+movieName = "Piper"
+
+
+# loading video gfg
+clip = VideoFileClip(file)
+# --------------------------------------------
+
 
 class bcolors:
     HEADER = '\033[95m'
@@ -53,7 +65,7 @@ def split(movieName, clip, clipStart, totalClips, clipEnd):
         os.mkdir(path)
         print(bcolors.OKGREEN + "Directory '" + movieName + "' Created" + bcolors.ENDC)
     except OSError as error: 
-        print(bcolors.WARNING + str(error) + bcolors.ENDC)  
+        print(bcolors.WARNING + str(error) + bcolors.ENDC + "\n")  
     
     # change directory to output movie clips
     os.chdir(path)
@@ -63,22 +75,6 @@ def split(movieName, clip, clipStart, totalClips, clipEnd):
     print(bcolors.OKGREEN + "Clip " + str(movieName) + "_" + str(totalClips) + " Created in Directory " + str(path) + "\n" + bcolors.ENDC)
 
 
-
-
-# Enter movie file path
-file = "Source\Piper.mp4"
-
-# Enter Movie Name
-movieName = "Piper"
-
-
-# loading video gfg
-clip = VideoFileClip(file)
-
-
-
-
-
 # getting duration of the video
 duration = clip.duration
   
@@ -86,26 +82,23 @@ duration = clip.duration
 print("Duration : " + str(duration))
 
 
-
-# split time into 60 second clips
-
+# split into 60 second clips
 totalClips = int(duration//60)
-
-
 clipStart = 0
 clipEnd = 60
 
-
 for i in range(totalClips):
-    print("Clip Start: " + str(clipStart))
-    print("Clip End: " + str(clipEnd))
-
     split(movieName, clip, clipStart, i, clipEnd)
-
+    
     if i < totalClips:
         clipStart += 60
         clipEnd += 60
-
+    
+    print(bcolors.BOLD + "Progress: " + bcolors.ENDC + 
+        bcolors.OKGREEN + str(i+1) + bcolors.ENDC + 
+        bcolors.BOLD + "/" + bcolors.ENDC + 
+        bcolors.FAIL + str(totalClips) + bcolors.ENDC + 
+        "\n")
 
 
 
