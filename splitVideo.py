@@ -7,10 +7,6 @@ file = "Source\Piper.mp4"
 
 # Enter Movie Name
 movieName = "Piper"
-
-
-# loading video gfg
-clip = VideoFileClip(file)
 # --------------------------------------------
 
 
@@ -75,12 +71,14 @@ def split(movieName, clip, clipStart, totalClips, clipEnd):
     print(bcolors.OKGREEN + "Clip " + str(movieName) + "_" + str(totalClips) + " Created in Directory " + str(path) + "\n" + bcolors.ENDC)
 
 
+# loading video gfg
+clip = VideoFileClip(file)
+
 # getting duration of the video
 duration = clip.duration
   
 # printing duration
 print("Duration : " + str(duration))
-
 
 # split into 60 second clips
 totalClips = int(duration//60)
